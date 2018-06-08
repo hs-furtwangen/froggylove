@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FemaleFrog : Frog {
+public class CameraMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -11,6 +11,6 @@ public class FemaleFrog : Frog {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.position = new Vector3(this.transform.position.x + 0.05f, this.transform.position.y, this.transform.position.z);
+		
 	}
 }
