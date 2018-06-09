@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour {
 	
 	void Update () {
 		timelimit -= Time.deltaTime;
-		Debug.Log(floatToReadableTime(timelimit));
+		// Debug.Log(floatToReadableTime(timelimit));
 
 		if(timelimit < 0){
 			//TODO: If time is up, end the game
