@@ -24,7 +24,8 @@ public class InputHandler : MonoBehaviour {
 			Touch touch = Input.GetTouch(0);
 			Ray touchRay = Camera.main.ScreenPointToRay(touch.position);
 			RaycastHit hit;
-			if(Physics.Raycast(touchRay.origin, touchRay.direction * 10, out hit)){
+			if(Physics.Raycast(touchRay.origin, touchRay.direction * 30, out hit)){
+				Debug.Log(hit.collider.gameObject.name);
 				if(hit.collider.gameObject.GetComponentInParent<MaleFrog>() != null){
 					holdingFrog = true;
 					frog = hit.collider.gameObject;
