@@ -23,10 +23,12 @@ public class Frog : MonoBehaviour {
     {
         this.moveTarget = target;
         if(target != null){
-        targetPos = target.transform.position;
+            targetPos = target.transform.position;
+            this.transform.LookAt(moveTarget.transform);
         } else {
             targetPos = Vector3.zero;
         }
+        // this.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y + 90 ,0);
     }
     protected void move()
     {

@@ -55,11 +55,22 @@ public class MaleFrog : Frog{
         speed = 2f * size;
         initColor();
         initColliders();
+        state = behaviourStates.MOVING;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (moveTarget != null)
+        if(state == behaviourStates.FALLING){
+            this.transform.position += Vector3.down * Time.deltaTime;
+            float min = size / 10;
+            if(this.transform.position.y < min){
+                Debug.Log(min);
+                this.transform.position = new Vector3(this.transform.position.x, min, this.transform.position.z);
+                state = behaviourStates.MOVING;
+                moveTo(GameObject.FindGameObjectWithTag("Log").GetComponent<Log>().getFreePosition());
+            } 
+        }
+        if (moveTarget != null && state == behaviourStates.MOVING)
         {
             move();
         
@@ -76,6 +87,7 @@ public class MaleFrog : Frog{
                     if(!log.occupyPosition(moveTarget)){
                         moveTo(log.getFreePosition());
                     } else {
+                        state = behaviourStates.SITTING;
                         this.transform.position = new Vector3(moveTarget.transform.position.x,moveTarget.transform.position.y, moveTarget.transform.position.z);
                         moveTo(null);
                     }

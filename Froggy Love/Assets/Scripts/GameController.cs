@@ -40,7 +40,12 @@ public class GameController : MonoBehaviour {
 
 	string floatToReadableTime(float time){
 		string readable = "";
-		readable += Mathf.FloorToInt(time / 60) + ":" + Mathf.FloorToInt(time % 60);
+        if (Mathf.FloorToInt(time % 60) > 9){
+            readable += Mathf.FloorToInt(time / 60) + ":" + Mathf.FloorToInt(time % 60);
+        } else {
+            readable += Mathf.FloorToInt(time / 60) + ":0" + Mathf.FloorToInt(time % 60);
+        }
+
 
 		return readable;
 	}
