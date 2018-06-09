@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animation))]
 public class Frog : MonoBehaviour {
     protected colors colors;
     protected float speed;
     protected float pointPotential;
     protected float size;
-    private GameObject moveTarget;
+    protected GameObject moveTarget;
     private Vector3 currentPos;
     private Vector3 targetPos;
     private float timer;
     Vector3 nextPosition = Vector3.zero;
-
+    Animation anim;
 
     public colors GetColors()
     {
         return this.colors;
     }
-
     public void moveTo(GameObject target)
     {
         this.moveTarget = target;
@@ -27,30 +27,38 @@ public class Frog : MonoBehaviour {
     protected void move()
     {
         currentPos = this.transform.position;
-        if(timer < -2){
-            timer = Random.Range(1.5f,2.5f);
-            
-            
+        if (timer < -2)
+        {
+            timer = Random.Range(1.5f, 2.5f);
             nextPosition = currentPos + (targetPos - currentPos).normalized * speed;
-            // Debug.Log("Momentum: " + momentum);
+            // anim.Play("FrogTest");
         }
-        if(timer > 0){
+        if (timer > 0)
+        {
             this.transform.position += (nextPosition - currentPos) / speed / 3;
+            // Debug.Log(nextPosition + " " + currentPos);
         }
-        
+
         if (this.transform.position == targetPos)
         {
             targetPos = new Vector3(0, 0, 0);
             moveTarget = null;
         }
 
-        
+
         timer -= Time.deltaTime;
     }
-    // Use this for initialization
-    void Start () {
-        size = (Random.Range(1f, 2f));
-        speed = 0.1f * size;
+    protected void initColliders()
+    {
+        Collider collider = this.gameObject.AddComponent<BoxCollider>();
+        GameObject froggy = GameObject.Find("Froggy");
+        froggy.transform.localScale.Set(size, size, size);
+        froggy.transform.position.Set(0, (size / 2), 0);
+        collider.transform.localScale.Set(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z);
+        collider.transform.position.Set(froggy.transform.position.x, froggy.transform.position.y, froggy.transform.position.z);
+    }
+    protected void initColor()
+    {
         float randColors = (Random.Range(0.0f, 100.0f));
         if (randColors <= 40f)
         {
@@ -77,7 +85,20 @@ public class Frog : MonoBehaviour {
             this.colors = colors.RAINBOW;
             pointPotential = 12.5f;
         }
+    }
 
+    protected void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
+    // Use this for initialization
+    void Start () {
+        anim = GetComponent<Animation>();
+        size = (Random.Range(1f, 2f));
+        speed = 2f * size;
+        initColor();
+        initColliders();
     }
 
     // Update is called once per frame
