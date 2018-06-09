@@ -25,25 +25,39 @@ public class MaleFrog : Frog{
     }
     public int getPoints()
     {
-        return (int)(this.size * 1000) + +(int)(Random.Range(0.0f, 999.0f));
+        return (int)(this.size * 1000) +(int)(Random.Range(0.0f, 999.0f));
     }
     public void pickUp()
     {
-
+        state = behaviourStates.FLOATING;
     }
 
     public void putDown()
     {
-
+        state = behaviourStates.FALLING;
     }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    protected void OnCollisionEnter(Collision collision)
+    {
+        if(state == behaviourStates.FALLING)
+        {
+            if (collision.gameObject.GetComponent<FemaleFrog>() != null)
+            {
+                attachTo(collision.gameObject);
+            }
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
+        size = (Random.Range(1f, 2f));
+        speed = 0.1f * size;
+        initColor();
+        initColliders();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
+        
 	}
 }
