@@ -50,8 +50,8 @@ public class MaleFrog : Frog{
 
     // Use this for initialization
     void Start () {
-        size = (Random.Range(1f, 2f));
-        speed = 0.1f * size;
+        size = (Random.Range(0.5f, 1f));
+        speed = 2f * size;
         initColor();
         initColliders();
     }
