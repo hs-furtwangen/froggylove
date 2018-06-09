@@ -42,7 +42,7 @@ public class Spawner : MonoBehaviour {
 			//create new GO here
 			GameObject f = Instantiate(spawnable);
 			f.transform.position = this.transform.position;
-			// f.GetComponent<Frog>().moveTo(target);
+			f.GetComponent<Frog>().moveTo(target);
 			timeLeft = Random.Range(minTimeOut, maxTimeOut);
 			toSpawn--;
 		}

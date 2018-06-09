@@ -29,7 +29,7 @@ public class FemaleFrog : Frog {
 	// Use this for initialization
 	void Start () {
         size = (Random.Range(1f, 2f));
-        speed = 0.1f * size;
+        speed = 2f * size;
         float randColors = (Random.Range(0.0f, 100.0f));
         if (randColors <= 40f)
         {

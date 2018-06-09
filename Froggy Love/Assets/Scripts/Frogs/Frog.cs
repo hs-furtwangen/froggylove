@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animation))]
 public class Frog : MonoBehaviour {
     protected colors colors;
     protected float speed;
     protected float pointPotential;
     protected float size;
-    private GameObject moveTarget;
+    protected GameObject moveTarget;
     private Vector3 currentPos;
     private Vector3 targetPos;
     private float timer;
     Vector3 nextPosition = Vector3.zero;
+    Animation anim;
 
     public colors GetColors()
     {
@@ -26,14 +28,13 @@ public class Frog : MonoBehaviour {
     {
         currentPos = this.transform.position;
         if(timer < -2){
-            timer = Random.Range(1.5f,2.5f);
-            
-            
+            timer = Random.Range(1.5f,2.5f);            
             nextPosition = currentPos + (targetPos - currentPos).normalized * speed;
-            // Debug.Log("Momentum: " + momentum);
+            // anim.Play("FrogTest");
         }
         if(timer > 0){
             this.transform.position += (nextPosition - currentPos) / speed / 3;
+            // Debug.Log(nextPosition + " " + currentPos);
         }
         
         if (this.transform.position == targetPos)
@@ -47,10 +48,12 @@ public class Frog : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        Collider collider = this.gameObject.AddComponent<BoxCollider>();
+        // Collider collider = this.gameObject.AddComponent<BoxCollider>();
+        anim = GetComponent<Animation>();
 
         size = (Random.Range(1f, 2f));
-        speed = 0.1f * size;
+        speed = 2f * size;
+
         float randColors = (Random.Range(0.0f, 100.0f));
         if (randColors <= 40f)
         {
