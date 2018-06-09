@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour {
-
+    public static GameController gameControllerInstance;
 	int points = 0;
 	float timelimit = 300;
 
+    public void addPoints(int points, float multiplier)
+    {
+        this.points += (int)(points * multiplier);
+    }
+
 	void Start () {
-		
+        if(gameControllerInstance == null)
+        {
+            gameControllerInstance = this;
+        }
 	}
 	
 	void Update () {
