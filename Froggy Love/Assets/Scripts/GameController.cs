@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-	// Use this for initialization
+	int points = 0;
+	float timelimit = 300;
+
 	void Start () {
 		
 	}
 	
-	// Update is called once per frame
 	void Update () {
-		
+		timelimit -= Time.deltaTime;
+		Debug.Log(floatToReadableTime(timelimit));
+
+		if(timelimit < 0){
+			//TODO: If time is up, end the game
+		}
+	}
+
+	string floatToReadableTime(float time){
+		string readable = "";
+		readable += Mathf.FloorToInt(time / 60) + ":" + Mathf.FloorToInt(time % 60);
+
+		return readable;
 	}
 }
