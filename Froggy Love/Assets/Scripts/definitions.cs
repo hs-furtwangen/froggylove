@@ -5,5 +5,9 @@
 
 public enum behaviourStates
 {
-    SITTING, MOVING, PIGGYBACKING, FALLING, FLOATING
+    SITTING,
+    MOVING, 
+    PIGGYBACKING,
+    FALLING,
+    FLOATING
 }

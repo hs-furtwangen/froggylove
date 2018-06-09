@@ -13,6 +13,7 @@ public class Toad : FemaleFrog {
     }
 	// Use this for initialization
 	void Start () {
+        anim = GetComponentInChildren<Animator>();
         size = 3;
         speed = 2f * size;
         pointPotential = -1;
@@ -20,6 +21,9 @@ public class Toad : FemaleFrog {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (moveTarget != null)
+        {
+            move();
+        }
 	}
 }

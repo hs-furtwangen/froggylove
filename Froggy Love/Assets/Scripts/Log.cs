@@ -24,7 +24,7 @@ public class Log : MonoBehaviour
     {
         for (int i = 0; i < positionOccupied.Length; i++)
         {
-            if (positionOccupied[i])
+            if (!positionOccupied[i])
             {
                 return positions[i];
             }
@@ -54,6 +54,20 @@ public class Log : MonoBehaviour
             if (positions[i].Equals(position) && positionOccupied[i])
             {
                 positionOccupied[i] = false;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool isPositionStillFree(GameObject position){
+        for (int i = 0; i < positions.Length; i++)
+        {
+            if (positions[i].Equals(position))
+            if(positionOccupied[i])
+            {
+                return false;
+            } else {
                 return true;
             }
         }

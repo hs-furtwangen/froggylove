@@ -34,7 +34,7 @@ public class FemaleFrog : Frog {
 
 	// Use this for initialization
 	void Start () {
-        anim = GetComponent<Animation>();
+        anim = GetComponentInChildren<Animator>();
         size = (Random.Range(1.5f, 2f));
         speed = 2f * size;
         initColor();

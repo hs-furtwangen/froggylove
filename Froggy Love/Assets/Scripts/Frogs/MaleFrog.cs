@@ -50,6 +50,7 @@ public class MaleFrog : Frog{
 
     // Use this for initialization
     void Start () {
+        anim = GetComponentInChildren<Animator>();
         size = (Random.Range(0.5f, 1f));
         speed = 2f * size;
         initColor();
@@ -58,6 +59,28 @@ public class MaleFrog : Frog{
 	
 	// Update is called once per frame
 	void Update () {
+        if (moveTarget != null)
+        {
+            move();
         
+            if(moveTarget.tag == "Log"){
+                moveTo(moveTarget.GetComponent<Log>().getFreePosition());
+            }
+
+            if(moveTarget.transform.parent.tag == "Log"){
+                Log log = moveTarget.transform.parent.GetComponent<Log>();
+                if(!log.isPositionStillFree(moveTarget)){
+                    moveTo(log.getFreePosition());
+                }
+                if((transform.position - moveTarget.transform.position).magnitude < 1){
+                    if(!log.occupyPosition(moveTarget)){
+                        moveTo(log.getFreePosition());
+                    } else {
+                        this.transform.position = new Vector3(moveTarget.transform.position.x,moveTarget.transform.position.y, moveTarget.transform.position.z);
+                        moveTo(null);
+                    }
+                }
+            }
+        }
 	}
 }

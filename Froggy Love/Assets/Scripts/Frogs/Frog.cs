@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animation))]
+[RequireComponent(typeof(Animator))]
 public class Frog : MonoBehaviour {
     protected colors colors;
     protected float speed;
@@ -13,7 +13,7 @@ public class Frog : MonoBehaviour {
     private Vector3 targetPos;
     private float timer;
     Vector3 nextPosition = Vector3.zero;
-    protected Animation anim;
+    protected Animator anim;
 
     public colors GetColors()
     {
@@ -31,7 +31,7 @@ public class Frog : MonoBehaviour {
         {
             timer = Random.Range(1.5f, 2.5f);
             nextPosition = currentPos + (targetPos - currentPos).normalized * speed;
-            anim.Play("FrogTest");
+            anim.SetTrigger("JUMP");
         }
         if (timer > 0)
         {
@@ -99,7 +99,7 @@ public class Frog : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        anim = GetComponent<Animation>();
+        anim = GetComponentInChildren<Animator>();
         size = (Random.Range(1f, 2f));
         speed = 2f * size;
         initColor();
