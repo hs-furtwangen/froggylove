@@ -7,7 +7,6 @@ public class CameraMovement : MonoBehaviour {
     private bool gyroEnabled;
     public Gyroscope gyro;
     public Quaternion rot;
-    public GameObject cam;
   
 
     // Use this for initialization
@@ -38,7 +37,7 @@ public class CameraMovement : MonoBehaviour {
     {
         if (Input.gyro.enabled)
         {
-            Debug.Log(Input.gyro.attitude);
+            // Debug.Log(Input.gyro.attitude);
             transform.localRotation = rot * Quaternion.Inverse(gyro.attitude);
             //transform.localRotation = gyro.attitude * rot;
         }

@@ -27,7 +27,13 @@ public class Frog : MonoBehaviour {
     public void moveTo(GameObject target)
     {
         this.moveTarget = target;
-        targetPos = target.transform.position;
+        if(target != null){
+            targetPos = target.transform.position;
+            this.transform.LookAt(moveTarget.transform);
+        } else {
+            targetPos = Vector3.zero;
+        }
+        // this.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y + 90 ,0);
     }
     protected void move()
     {
@@ -59,9 +65,9 @@ public class Frog : MonoBehaviour {
         GameObject froggy = this.transform.Find("Froggy").gameObject;
 
         float physicalSize = size * 0.1f;
-        Debug.Log("Physical Size: " + physicalSize);
+        // Debug.Log("Physical Size: " + physicalSize);
         froggy.transform.localScale = new Vector3(physicalSize, physicalSize, physicalSize);
-        Debug.Log("New Size " + froggy.transform.localScale);
+        // Debug.Log("New Size " + froggy.transform.localScale);
         froggy.transform.position = new Vector3(froggy.transform.position.x, (physicalSize / 2), froggy.transform.position.z);
 
         collider.size = new Vector3(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z);
