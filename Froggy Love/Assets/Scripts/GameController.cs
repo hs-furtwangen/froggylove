@@ -6,7 +6,10 @@ public class GameController : MonoBehaviour {
     public static GameController gameControllerInstance;
 	int points = 0;
 	float timelimit = 300;
-
+    public int getPoints()
+    {
+        return points;
+    }
     public void addPoints(int points, float multiplier)
     {
         this.points += (int)(points * multiplier);
