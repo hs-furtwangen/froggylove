@@ -11,12 +11,10 @@ public class Frog : MonoBehaviour {
     private Vector3 currentPos;
     private Vector3 targetPos;
 
-
     public colors GetColors()
     {
         return this.colors;
     }
-
     public void moveTo(GameObject target)
     {
         this.moveTarget = target;
@@ -37,6 +35,8 @@ public class Frog : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        Collider collider = this.gameObject.AddComponent<BoxCollider>();
+
         size = (Random.Range(1f, 2f));
         speed = 0.1f * size;
         float randColors = (Random.Range(0.0f, 100.0f));

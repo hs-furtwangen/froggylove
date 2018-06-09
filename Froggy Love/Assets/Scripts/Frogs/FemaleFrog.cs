@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FemaleFrog : Frog {
-    private MaleFrog partner; 
+    protected MaleFrog partner; 
 
-    private void bang()
+    virtual protected void Bang()
     {
         if(partner != null)
         {
-            int totalPoints = (int)(this.size * 1000) + partner.getPoints();
+            int totalPoints = (int)(this.size * 1000) + partner.getPoints() + (int)(Random.Range(0.0f, 999.0f));
             if(this.colors == partner.GetColors())
             {
                 GameController.gameControllerInstance.addPoints(totalPoints, this.pointPotential);
@@ -56,6 +56,7 @@ public class FemaleFrog : Frog {
             this.colors = colors.RAINBOW;
             pointPotential = 12.5f;
         }
+
     }
 	
 	// Update is called once per frame
