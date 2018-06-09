@@ -50,12 +50,17 @@ public class Frog : MonoBehaviour {
     }
     protected void initColliders()
     {
-        Collider collider = this.gameObject.AddComponent<BoxCollider>();
-        GameObject froggy = GameObject.Find("Froggy");
-        froggy.transform.localScale.Set(size, size, size);
-        froggy.transform.position.Set(0, (size / 2), 0);
-        collider.transform.localScale.Set(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z);
-        collider.transform.position.Set(froggy.transform.position.x, froggy.transform.position.y, froggy.transform.position.z);
+        BoxCollider collider = this.gameObject.AddComponent<BoxCollider>();
+        GameObject froggy = this.transform.Find("Froggy").gameObject;
+
+        float physicalSize = size * 0.1f;
+        Debug.Log("Physical Size: " + physicalSize);
+        froggy.transform.localScale = new Vector3(physicalSize, physicalSize, physicalSize);
+        Debug.Log("New Size " + froggy.transform.localScale);
+        froggy.transform.position = new Vector3(froggy.transform.position.x, (physicalSize / 2), froggy.transform.position.z);
+
+        collider.size = new Vector3(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z);
+        collider.center = new Vector3(froggy.transform.position.x, froggy.transform.position.y, froggy.transform.position.z);
     }
     protected void initColor()
     {

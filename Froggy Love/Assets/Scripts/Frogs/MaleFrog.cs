@@ -25,7 +25,7 @@ public class MaleFrog : Frog{
     }
     public int getPoints()
     {
-        return (int)(this.size * 1000) +(int)(Random.Range(0.0f, 999.0f));
+        return (int)(this.size * 100000) +(int)(Random.Range(0.0f, 999.0f));
     }
     public void pickUp()
     {

@@ -9,7 +9,7 @@ public class FemaleFrog : Frog {
     {
         if(partner != null)
         {
-            int totalPoints = (int)(this.size * 1000) + partner.getPoints() + (int)(Random.Range(0.0f, 999.0f));
+            int totalPoints = (int)(this.size * 100000) + partner.getPoints() + (int)(Random.Range(0.0f, 999.0f));
             if(this.colors == partner.GetColors())
             {
                 GameController.gameControllerInstance.addPoints(totalPoints, this.pointPotential);

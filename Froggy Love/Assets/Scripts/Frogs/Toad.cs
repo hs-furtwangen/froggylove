@@ -13,8 +13,8 @@ public class Toad : FemaleFrog {
     }
 	// Use this for initialization
 	void Start () {
-        size = (Random.Range(1.5f, 3f));
-        speed = 0.1f * size;
+        size = 3;
+        speed = 2f * size;
         pointPotential = -1;
     }
 	
