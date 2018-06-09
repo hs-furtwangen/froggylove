@@ -7,11 +7,11 @@ public class Spawner : MonoBehaviour {
 	public Transform pos1;
 	public Transform pos2;
 	public float speed;
-	public Frog spawnable;
+	public GameObject spawnable;
 	public GameObject target;
 	float timeLeft = 0;
-	const float minTimeOut = 0.4f;
-	const float maxTimeOut = 1.5f;
+	const float minTimeOut = 1.5f;
+	const float maxTimeOut = 3f;
 	int toSpawn = 5;
 	bool direction = false;
 
@@ -40,9 +40,9 @@ public class Spawner : MonoBehaviour {
 			timeLeft -= Time.deltaTime;
 		} else if (toSpawn > 0){
 			//create new GO here
-			Frog f = Instantiate(spawnable);
+			GameObject f = Instantiate(spawnable);
 			f.transform.position = this.transform.position;
-			//TODO: set the target of the new object
+			// f.GetComponent<Frog>().moveTo(target);
 			timeLeft = Random.Range(minTimeOut, maxTimeOut);
 			toSpawn--;
 		}

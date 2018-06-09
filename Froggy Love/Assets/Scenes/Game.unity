@@ -625,6 +625,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &997454022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 997454023}
+  m_Layer: 0
+  m_Name: Lake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &997454023
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997454022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1424402884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1003,8 +1031,7 @@ MonoBehaviour:
   pos1: {fileID: 585770026}
   pos2: {fileID: 295653777}
   speed: 0.1
-  spawnable: {fileID: 114335761568565696, guid: 56372d5d723f1d348bf8dc583e09a96b,
-    type: 2}
+  spawnable: {fileID: 1094268032984584, guid: 56372d5d723f1d348bf8dc583e09a96b, type: 2}
   target: {fileID: 244221463}
 --- !u!65 &2097133650
 BoxCollider:

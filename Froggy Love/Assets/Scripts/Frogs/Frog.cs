@@ -10,6 +10,8 @@ public class Frog : MonoBehaviour {
     private GameObject moveTarget;
     private Vector3 currentPos;
     private Vector3 targetPos;
+    private float timer;
+    Vector3 nextPosition = Vector3.zero;
 
     public colors GetColors()
     {
@@ -18,20 +20,30 @@ public class Frog : MonoBehaviour {
     public void moveTo(GameObject target)
     {
         this.moveTarget = target;
-        currentPos = this.transform.position;
         targetPos = target.transform.position;
     }
-    private void move()
+    protected void move()
     {
+        currentPos = this.transform.position;
+        if(timer < -2){
+            timer = Random.Range(1.5f,2.5f);
+            
+            
+            nextPosition = currentPos + (targetPos - currentPos).normalized * speed;
+            // Debug.Log("Momentum: " + momentum);
+        }
+        if(timer > 0){
+            this.transform.position += (nextPosition - currentPos) / speed / 3;
+        }
         
-        Vector3 momentum = Vector3.Lerp(currentPos, targetPos, 0.1f * speed);
-        Debug.Log("Momentum: " + momentum);
-        this.transform.position += momentum;
         if (this.transform.position == targetPos)
         {
             targetPos = new Vector3(0, 0, 0);
             moveTarget = null;
         }
+
+        
+        timer -= Time.deltaTime;
     }
     // Use this for initialization
     void Start () {
