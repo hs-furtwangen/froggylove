@@ -53,6 +53,7 @@ public class MaleFrog : Frog{
         anim = GetComponentInChildren<Animator>();
         size = (Random.Range(0.5f, 1f));
         speed = 2f * size;
+        initMaterials();
         initColor();
         initColliders();
     }
