@@ -13,7 +13,7 @@ public class Frog : MonoBehaviour {
     private Vector3 targetPos;
     private float timer;
     Vector3 nextPosition = Vector3.zero;
-    Animation anim;
+    protected Animation anim;
 
     public colors GetColors()
     {
@@ -31,7 +31,7 @@ public class Frog : MonoBehaviour {
         {
             timer = Random.Range(1.5f, 2.5f);
             nextPosition = currentPos + (targetPos - currentPos).normalized * speed;
-            // anim.Play("FrogTest");
+            anim.Play("FrogTest");
         }
         if (timer > 0)
         {
