@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 111529836127084712}
   m_Layer: 0
   m_Name: Toad
-  m_TagString: Untagged
+  m_TagString: FemaleFrog
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

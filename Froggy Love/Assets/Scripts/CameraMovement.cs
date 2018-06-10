@@ -39,6 +39,7 @@ public class CameraMovement : MonoBehaviour {
         {
             // Debug.Log(Input.gyro.attitude);
             transform.localRotation = rot * Quaternion.Inverse(gyro.attitude);
+            // transform.rotation = Quaternion.Euler(Input.deviceOrientation.);
             //transform.localRotation = gyro.attitude * rot;
         }
     }

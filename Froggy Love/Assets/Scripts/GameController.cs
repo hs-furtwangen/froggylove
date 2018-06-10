@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour {
     public Text ScoreText;
     public Text TimeText;
 
+    public GameObject femaleSpawner;
+    public GameObject maleSpawner;
+
 	int points = 0;
 	float timelimit = 300;
     public int getPoints()
@@ -24,6 +27,8 @@ public class GameController : MonoBehaviour {
         {
             gameControllerInstance = this;
         }
+
+        timelimit = Config.TimeLimit;
 	}
 	
 	void Update () {
@@ -32,10 +37,36 @@ public class GameController : MonoBehaviour {
 
 		if(timelimit < 0){
 			//TODO: If time is up, end the game
+            List<int> scoresList = new List<int>();
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(Application.persistentDataPath + "/highscores.txt")){
+                string scoresline = "";
+                do{
+                    scoresline = sr.ReadLine();
+                    if(scoresline != null){
+                        scoresList.Add(int.Parse(scoresline));
+                    }
+
+                } while (scoresline != null);
+            }
+            scoresList.Add(points);
+            scoresList.Sort();
+            string[] scoresString = new string[scoresList.Count];
+            for(int i = 0; i < scoresList.Count; i++){
+                scoresString[i] = scoresList[i].ToString();
+            }
+            System.IO.File.WriteAllLines(Application.persistentDataPath + "/highscores.txt", scoresString);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
 		}
 
         ScoreText.text = points.ToString();
         TimeText.text = floatToReadableTime(timelimit);
+
+        int countMale = GameObject.FindGameObjectsWithTag("MaleFrog").Length;
+        int countFemale = GameObject.FindGameObjectsWithTag("FemaleFrog").Length;
+
+        femaleSpawner.GetComponent<Spawner>().spawnNew(Config.femaleFrogLimit - countFemale);
+        maleSpawner.GetComponent<Spawner>().spawnNew(Config.maleFrogLimit - countMale);
+
 	}
 
 	string floatToReadableTime(float time){
