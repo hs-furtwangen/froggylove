@@ -14,6 +14,11 @@ public class Frog : MonoBehaviour {
     private float timer;
     Vector3 nextPosition = Vector3.zero;
     protected Animator anim;
+    protected Material greenMat ;
+    protected Material yellowMat;
+    protected Material blueMat;
+    protected Material redMat;
+    protected Material gayMat;
 
     public colors GetColors()
     {
@@ -23,10 +28,12 @@ public class Frog : MonoBehaviour {
     {
         this.moveTarget = target;
         if(target != null){
-        targetPos = target.transform.position;
+            targetPos = target.transform.position;
+            this.transform.LookAt(moveTarget.transform);
         } else {
             targetPos = Vector3.zero;
         }
+        // this.transform.rotation = Quaternion.Euler(0, this.transform.rotation.y + 90 ,0);
     }
     protected void move()
     {
@@ -66,33 +73,50 @@ public class Frog : MonoBehaviour {
         collider.size = new Vector3(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z);
         collider.center = new Vector3(froggy.transform.position.x, froggy.transform.position.y, froggy.transform.position.z);
     }
+    protected virtual void initMaterials()
+    {
+        greenMat = Resources.Load<Material>("Material/green");
+        yellowMat = Resources.Load<Material>("Material/yellow");
+        blueMat = Resources.Load<Material>("Material/blue");
+        redMat = Resources.Load<Material>("Material/red");
+        gayMat = Resources.Load<Material>("Material/rainbow");
+        Debug.Log(gayMat);
+    }
     protected void initColor()
     {
+        GameObject froggy = this.transform.Find("Froggy").transform.Find("Frogbody").gameObject ;
+        Renderer frogRenderer = froggy.GetComponent<Renderer>();
+
         float randColors = (Random.Range(0.0f, 100.0f));
         if (randColors <= 40f)
         {
             this.colors = colors.GREEN;
             pointPotential = 2.5f;
+            frogRenderer.material = greenMat;
         }
         else if (randColors <= 65f)
         {
             this.colors = colors.YELLOW;
             pointPotential = 4f;
+            frogRenderer.material = yellowMat;
         }
         else if (randColors <= 82f)
         {
             this.colors = colors.BLUE;
             pointPotential = 6f;
+            frogRenderer.material = blueMat;
         }
         else if (randColors <= 92f)
         {
             this.colors = colors.RED;
             pointPotential = 10f;
+            frogRenderer.material = redMat;
         }
         else if (randColors <= 100f)
         {
             this.colors = colors.RAINBOW;
             pointPotential = 12.5f;
+            frogRenderer.material = gayMat;
         }
     }
 
@@ -106,6 +130,7 @@ public class Frog : MonoBehaviour {
         anim = GetComponentInChildren<Animator>();
         size = (Random.Range(1f, 2f));
         speed = 2f * size;
+        this.initMaterials();
         initColor();
         initColliders();
     }

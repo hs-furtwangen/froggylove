@@ -32,11 +32,22 @@ public class FemaleFrog : Frog {
         
     }
 
+    override protected void initMaterials()
+    {
+        greenMat = Resources.Load<Material>("Material/femaleGreen");
+        yellowMat = Resources.Load<Material>("Material/femaleYellow");
+        blueMat = Resources.Load<Material>("Material/femaleBlue");
+        redMat = Resources.Load<Material>("Material/femaleRed");
+        gayMat = Resources.Load<Material>("Material/rainbow");
+        Debug.Log("Fuuuuuck");
+    }
+
 	// Use this for initialization
 	void Start () {
         anim = GetComponentInChildren<Animator>();
         size = (Random.Range(1.5f, 2f));
         speed = 2f * size;
+        initMaterials();
         initColor();
         initColliders();
     }

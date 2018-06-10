@@ -25,17 +25,18 @@ public class InputHandler : MonoBehaviour {
 			Ray touchRay = Camera.main.ScreenPointToRay(touch.position);
 			RaycastHit hit;
 			if(Physics.Raycast(touchRay.origin, touchRay.direction * 30, out hit)){
-				Debug.Log(hit.collider.gameObject.name);
+				// Debug.Log(hit.collider.gameObject.name);
 				if(hit.collider.gameObject.GetComponentInParent<MaleFrog>() != null){
 					holdingFrog = true;
 					frog = hit.collider.gameObject;
+					frog.GetComponent<MaleFrog>().pickUp();
 				} else if(hit.collider.gameObject == hitboxPlane){
 					frog.transform.position = hit.point;
 				}
 			}
 		} else if(holdingFrog){
-			//TODO: drop frog
-			frog.transform.position = new Vector3(frog.transform.position.x, 0, frog.transform.position.z);
+			frog.GetComponent<MaleFrog>().putDown();
+			// frog.transform.position = new Vector3(frog.transform.position.x, 0, frog.transform.position.z);
 			frog = null;
 			holdingFrog = false;
 			Debug.Log("Stop holding Frog");
