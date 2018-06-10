@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaleFrog : Frog{
 
-    private behaviourStates state;
+    public behaviourStates state;
 
     public void setBehaviourState(behaviourStates state)
     {
@@ -46,7 +46,7 @@ public class MaleFrog : Frog{
         // Debug.Log("hit1");
         if(state == behaviourStates.FALLING)
         {
-            if (collision.gameObject.GetComponent<FemaleFrog>() != null)
+            if (collision.gameObject.GetComponent<FemaleFrog>() != null && collision.gameObject.GetComponent<FemaleFrog>().partner == null)
             {
                 attachTo(collision.gameObject);
             }
