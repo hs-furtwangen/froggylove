@@ -13,7 +13,7 @@ public class MaleFrog : Frog{
 
     public void attachTo(GameObject target)
     {
-        Debug.Log("Hit");
+        // Debug.Log("Hit");
         if (target.GetComponent<FemaleFrog>() != null)
         {
             Vector3 attachTarget = target.transform.Find("Marker").transform.position;
@@ -22,11 +22,12 @@ public class MaleFrog : Frog{
             FemaleFrog partner = target.GetComponent<FemaleFrog>();
             partner.setPartner(this);
             this.transform.SetParent(target.transform);
+            this.tag = "Tag";
         }
     }
     public int getPoints()
     {
-        return (int)(this.size * 100000) +(int)(Random.Range(0.0f, 999.0f));
+        return (int)(this.size * 10) +(int)(Random.Range(0.0f, 9.0f));
     }
     public void pickUp()
     {
@@ -42,7 +43,7 @@ public class MaleFrog : Frog{
 
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("hit1");
+        // Debug.Log("hit1");
         if(state == behaviourStates.FALLING)
         {
             if (collision.gameObject.GetComponent<FemaleFrog>() != null)
@@ -71,7 +72,7 @@ public class MaleFrog : Frog{
             float min = size / 2;
             if(this.transform.position.y < min){
                 // Debug.Log(min);
-                this.transform.position = new Vector3(this.transform.position.x, min, this.transform.position.z);
+                 GetComponent<Rigidbody>().MovePosition(new Vector3(this.transform.position.x, min, this.transform.position.z));
                 state = behaviourStates.MOVING;
                 moveTo(GameObject.FindGameObjectWithTag("Log").GetComponent<Log>().getFreePosition());
                 // Debug.Log(moveTarget.name + ", " + this.transform.position);

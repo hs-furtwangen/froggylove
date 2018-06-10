@@ -9,7 +9,7 @@ public class FemaleFrog : Frog {
     {
         if(partner != null)
         {
-            int totalPoints = (int)(this.size * 100000) + partner.getPoints() + (int)(Random.Range(0.0f, 999.0f));
+            int totalPoints = (int)(this.size * 10) + partner.getPoints() + (int)(Random.Range(0.0f, 9.0f));
             if(this.colors == partner.GetColors())
             {
                 GameController.gameControllerInstance.addPoints(totalPoints, this.pointPotential);
@@ -19,6 +19,8 @@ public class FemaleFrog : Frog {
                 GameController.gameControllerInstance.addPoints(totalPoints, 1);
             }
         }
+
+        Destroy(this.gameObject);
     }
 
     protected void OnCollisionEnter(Collision collision)
@@ -46,7 +48,7 @@ public class FemaleFrog : Frog {
 	void Start () {
         anim = GetComponentInChildren<Animator>();
         size = (Random.Range(1.5f, 2f));
-        speed = 2f * size;
+        speed = 3f * size;
         initMaterials();
         initColor();
         initColliders();
@@ -54,9 +56,13 @@ public class FemaleFrog : Frog {
 	
 	// Update is called once per frame
 	void Update () {
+        // Debug.Log("Female Move: " + moveTarget);
         if (moveTarget != null)
         {
             move();
+            if((this.transform.position - moveTarget.transform.position).magnitude < 2){
+                Bang();
+            }
         }
 	}
 }

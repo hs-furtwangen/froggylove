@@ -39,7 +39,7 @@ public class InputHandler : MonoBehaviour {
 			// frog.transform.position = new Vector3(frog.transform.position.x, 0, frog.transform.position.z);
 			frog = null;
 			holdingFrog = false;
-			Debug.Log("Stop holding Frog");
+			// Debug.Log("Stop holding Frog");
 		}
 	}
 }

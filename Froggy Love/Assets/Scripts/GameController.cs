@@ -8,6 +8,9 @@ public class GameController : MonoBehaviour {
     public Text ScoreText;
     public Text TimeText;
 
+    public GameObject femaleSpawner;
+    public GameObject maleSpawner;
+
 	int points = 0;
 	float timelimit = 300;
     public int getPoints()
@@ -24,6 +27,8 @@ public class GameController : MonoBehaviour {
         {
             gameControllerInstance = this;
         }
+
+        timelimit = Config.TimeLimit;
 	}
 	
 	void Update () {
@@ -36,6 +41,13 @@ public class GameController : MonoBehaviour {
 
         ScoreText.text = points.ToString();
         TimeText.text = floatToReadableTime(timelimit);
+
+        int countMale = GameObject.FindGameObjectsWithTag("MaleFrog").Length;
+        int countFemale = GameObject.FindGameObjectsWithTag("FemaleFrog").Length;
+
+        femaleSpawner.GetComponent<Spawner>().spawnNew(Config.femaleFrogLimit - countFemale);
+        maleSpawner.GetComponent<Spawner>().spawnNew(Config.maleFrogLimit - countMale);
+
 	}
 
 	string floatToReadableTime(float time){
