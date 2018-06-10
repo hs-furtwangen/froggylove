@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour {
 				random = 1;
 			}
 			GameObject f;
-			if(random > 0.05){
+			if(random > 0.1){
 				f = Instantiate(spawnable);
 			} else {
 				Debug.Log("Spawnable2");
