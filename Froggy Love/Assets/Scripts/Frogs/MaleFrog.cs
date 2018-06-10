@@ -21,6 +21,7 @@ public class MaleFrog : Frog{
             setBehaviourState(behaviourStates.PIGGYBACKING);
             FemaleFrog partner = target.GetComponent<FemaleFrog>();
             partner.setPartner(this);
+            this.transform.rotation = target.transform.rotation;
             this.transform.SetParent(target.transform);
             this.tag = "Tag";
         }
