@@ -37,6 +37,25 @@ public class GameController : MonoBehaviour {
 
 		if(timelimit < 0){
 			//TODO: If time is up, end the game
+            List<int> scoresList = new List<int>();
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(Application.persistentDataPath + "/highscores.txt")){
+                string scoresline = "";
+                do{
+                    scoresline = sr.ReadLine();
+                    if(scoresline != null){
+                        scoresList.Add(int.Parse(scoresline));
+                    }
+
+                } while (scoresline != null);
+            }
+            scoresList.Add(points);
+            scoresList.Sort();
+            string[] scoresString = new string[scoresList.Count];
+            for(int i = 0; i < scoresList.Count; i++){
+                scoresString[i] = scoresList[i].ToString();
+            }
+            System.IO.File.WriteAllLines(Application.persistentDataPath + "/highscores.txt", scoresString);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
 		}
 
         ScoreText.text = points.ToString();
