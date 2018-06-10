@@ -39,7 +39,7 @@ public class FemaleFrog : Frog {
         blueMat = Resources.Load<Material>("Material/femaleBlue");
         redMat = Resources.Load<Material>("Material/femaleRed");
         gayMat = Resources.Load<Material>("Material/rainbow");
-        Debug.Log("Fuuuuuck");
+        // Debug.Log("Fuuuuuck");
     }
 
 	// Use this for initialization

@@ -11,7 +11,7 @@ public class Frog : MonoBehaviour {
     protected GameObject moveTarget;
     private Vector3 currentPos;
     private Vector3 targetPos;
-    private float timer;
+    protected float timer;
     Vector3 nextPosition = Vector3.zero;
     protected Animator anim;
     protected Material greenMat ;
@@ -53,7 +53,7 @@ public class Frog : MonoBehaviour {
         if (this.transform.position == targetPos)
         {
             targetPos = new Vector3(0, 0, 0);
-            moveTarget = null;
+            // moveTarget = null;
         }
 
 
@@ -70,8 +70,9 @@ public class Frog : MonoBehaviour {
         // Debug.Log("New Size " + froggy.transform.localScale);
         froggy.transform.position = new Vector3(froggy.transform.position.x, (physicalSize / 2), froggy.transform.position.z);
 
-        collider.size = new Vector3(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z);
-        collider.center = new Vector3(froggy.transform.position.x, froggy.transform.position.y, froggy.transform.position.z);
+        collider.size = new Vector3(froggy.transform.localScale.x, froggy.transform.localScale.y, froggy.transform.localScale.z) * 10;
+        collider.center = new Vector3(0, 0, 0);
+        collider.isTrigger = true;
     }
     protected virtual void initMaterials()
     {
@@ -120,9 +121,8 @@ public class Frog : MonoBehaviour {
         }
     }
 
-    protected void OnCollisionEnter(Collision collision)
-    {
-        
+    protected virtual void OnCollisionEnter(Collision collision){
+
     }
 
     // Use this for initialization

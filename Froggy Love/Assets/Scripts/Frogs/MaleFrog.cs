@@ -13,6 +13,7 @@ public class MaleFrog : Frog{
 
     public void attachTo(GameObject target)
     {
+        Debug.Log("Hit");
         if (target.GetComponent<FemaleFrog>() != null)
         {
             Vector3 attachTarget = target.transform.Find("Marker").transform.position;
@@ -20,7 +21,7 @@ public class MaleFrog : Frog{
             setBehaviourState(behaviourStates.PIGGYBACKING);
             FemaleFrog partner = target.GetComponent<FemaleFrog>();
             partner.setPartner(this);
-            target.transform.SetParent(this.transform);
+            this.transform.SetParent(target.transform);
         }
     }
     public int getPoints()
@@ -30,15 +31,18 @@ public class MaleFrog : Frog{
     public void pickUp()
     {
         state = behaviourStates.FLOATING;
+        GameObject.FindGameObjectWithTag("Log").GetComponent<Log>().freePosition(moveTarget);
     }
 
     public void putDown()
     {
         state = behaviourStates.FALLING;
+        moveTo(null);
     }
 
-    protected void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
+        Debug.Log("hit1");
         if(state == behaviourStates.FALLING)
         {
             if (collision.gameObject.GetComponent<FemaleFrog>() != null)
@@ -62,13 +66,16 @@ public class MaleFrog : Frog{
 	// Update is called once per frame
 	void Update () {
         if(state == behaviourStates.FALLING){
-            this.transform.position += Vector3.down * Time.deltaTime;
-            float min = size / 10;
+            // this.transform.position += Vector3.down * Time.deltaTime * 3;
+            GetComponent<Rigidbody>().MovePosition(this.transform.position + Vector3.down * Time.deltaTime * 3);
+            float min = size / 2;
             if(this.transform.position.y < min){
-                Debug.Log(min);
+                // Debug.Log(min);
                 this.transform.position = new Vector3(this.transform.position.x, min, this.transform.position.z);
                 state = behaviourStates.MOVING;
                 moveTo(GameObject.FindGameObjectWithTag("Log").GetComponent<Log>().getFreePosition());
+                // Debug.Log(moveTarget.name + ", " + this.transform.position);
+                timer = 0;
             } 
         }
         if (moveTarget != null && state == behaviourStates.MOVING)
@@ -88,9 +95,10 @@ public class MaleFrog : Frog{
                     if(!log.occupyPosition(moveTarget)){
                         moveTo(log.getFreePosition());
                     } else {
+                        // Debug.Log(this.transform.position + ", " + moveTarget.transform.position);
                         state = behaviourStates.SITTING;
-                        this.transform.position = new Vector3(moveTarget.transform.position.x,moveTarget.transform.position.y, moveTarget.transform.position.z);
-                        moveTo(null);
+                        this.transform.position = new Vector3(moveTarget.transform.position.x,moveTarget.transform.position.y + 1.7f, moveTarget.transform.position.z);
+                        // moveTo(null);
                     }
                 }
             }

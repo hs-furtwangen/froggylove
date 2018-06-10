@@ -40,6 +40,7 @@ public class Log : MonoBehaviour
             if (positions[i].Equals(position) && !positionOccupied[i])
             {
                 positionOccupied[i] = true;
+                // Debug.Log("occupied position " + positions[i].name);
                 return true;
             }
         }
@@ -54,6 +55,8 @@ public class Log : MonoBehaviour
             if (positions[i].Equals(position) && positionOccupied[i])
             {
                 positionOccupied[i] = false;
+                
+                // Debug.Log("freed position " + positions[i].name);
                 return true;
             }
         }
