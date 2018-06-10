@@ -33,13 +33,14 @@ public class MaleFrog : Frog{
     {
         state = behaviourStates.FLOATING;
         GameObject.FindGameObjectWithTag("Log").GetComponent<Log>().freePosition(moveTarget);
+        anim.SetTrigger("PICKUP");
     }
 
     public void putDown()
     {
         state = behaviourStates.FALLING;
         moveTo(null);
-    }
+        }
 
     void OnTriggerEnter(Collider collision)
     {
@@ -68,6 +69,7 @@ public class MaleFrog : Frog{
 	void Update () {
         if(state == behaviourStates.FALLING){
             // this.transform.position += Vector3.down * Time.deltaTime * 3;
+            anim.SetTrigger("LANDING");
             GetComponent<Rigidbody>().MovePosition(this.transform.position + Vector3.down * Time.deltaTime * 3);
             float min = size / 2;
             if(this.transform.position.y < min){
@@ -80,7 +82,7 @@ public class MaleFrog : Frog{
             } 
         }
         if (moveTarget != null && state == behaviourStates.MOVING)
-        {
+        {   
             move();
         
             if(moveTarget.tag == "Log"){
