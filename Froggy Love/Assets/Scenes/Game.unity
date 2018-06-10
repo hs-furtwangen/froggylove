@@ -1074,6 +1074,7 @@ MonoBehaviour:
   pos2: {fileID: 2539334}
   speed: 0.1
   spawnable: {fileID: 1086294270187872, guid: eaf35b4ca8b145948855a8ba7f111ec0, type: 2}
+  spawnable2: {fileID: 0}
   target: {fileID: 1315835368}
 --- !u!65 &789695763
 BoxCollider:
@@ -2473,6 +2474,7 @@ MonoBehaviour:
   pos2: {fileID: 295653777}
   speed: 0.97
   spawnable: {fileID: 1031633796089498, guid: eed63ba1b496281498424e7b5f519da0, type: 2}
+  spawnable2: {fileID: 0}
   target: {fileID: 978907034}
 --- !u!65 &2097133650
 BoxCollider:

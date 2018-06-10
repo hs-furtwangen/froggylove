@@ -8,6 +8,7 @@ public class Spawner : MonoBehaviour {
 	public Transform pos2;
 	public float speed;
 	public GameObject spawnable;
+	public GameObject spawnable2;
 	public GameObject target;
 	float timeLeft = 0;
 	const float minTimeOut = 1.0f;
@@ -40,7 +41,17 @@ public class Spawner : MonoBehaviour {
 			timeLeft -= Time.deltaTime;
 		} else if (toSpawn > 0){
 			//create new GO here
-			GameObject f = Instantiate(spawnable);
+			float random = Random.value;
+			if(spawnable2 == null){
+				random = 1;
+			}
+			GameObject f;
+			if(random > 0.05){
+				f = Instantiate(spawnable);
+			} else {
+				Debug.Log("Spawnable2");
+				f = Instantiate(spawnable2);
+			}
 			f.transform.position = this.transform.position;
 			f.GetComponent<Frog>().moveTo(target);
 			timeLeft = Random.Range(minTimeOut, maxTimeOut);
