@@ -37,10 +37,11 @@ public class Frog : MonoBehaviour {
     }
     protected void move()
     {
+        // Debug.Log(this.gameObject.name);
         currentPos = this.transform.position;
-        if (timer < -2)
+        if (timer < Random.Range(-2,-3))
         {
-            timer = Random.Range(1.5f, 2.5f);
+            timer = 0.5f;
             nextPosition = currentPos + (targetPos - currentPos).normalized * speed;
             anim.SetTrigger("JUMP");
         }
@@ -81,7 +82,7 @@ public class Frog : MonoBehaviour {
         blueMat = Resources.Load<Material>("Material/blue");
         redMat = Resources.Load<Material>("Material/red");
         gayMat = Resources.Load<Material>("Material/rainbow");
-        Debug.Log(gayMat);
+        // Debug.Log(gayMat);
     }
     protected void initColor()
     {
