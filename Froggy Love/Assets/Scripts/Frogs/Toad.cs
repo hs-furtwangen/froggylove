@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Toad : FemaleFrog {
+
+
     override protected void Bang()
     {
         if (partner != null)
@@ -11,12 +13,17 @@ public class Toad : FemaleFrog {
             GameController.gameControllerInstance.addPoints(totalPoints, pointPotential);
         }
     }
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         anim = GetComponentInChildren<Animator>();
         size = 3;
         speed = 3f * size;
         pointPotential = -1;
+        GameObject froggy = this.transform.Find("Froggy").transform.Find("Frogbody").gameObject;
+        Renderer frogRenderer = froggy.GetComponent<Renderer>();
+        Material toadMat;
+        toadMat = Resources.Load<Material>("Material/brown");
+        frogRenderer.material = toadMat;
     }
 	
 	// Update is called once per frame
