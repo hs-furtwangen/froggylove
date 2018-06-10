@@ -7,6 +7,8 @@ TagManager:
   - Froggy
   - Tag
   - Log
+  - MaleFrog
+  - FemaleFrog
   layers:
   - Default
   - TransparentFX
