@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4605014746264514}
   - component: {fileID: 137494050957046754}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Frogbody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1240400711684228}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.122, y: 0, z: -3.44}
+  m_LocalPosition: {x: -0.46, y: -0.33, z: -1.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4232281916478680}
@@ -782,6 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d81b90b0e1d1a45a8b545ab04db9cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partner: {fileID: 0}
 --- !u!137 &137494050957046754
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
