@@ -15,7 +15,7 @@ public class Toad : FemaleFrog {
 	void Start () {
         anim = GetComponentInChildren<Animator>();
         size = 3;
-        speed = 2f * size;
+        speed = 3f * size;
         pointPotential = -1;
     }
 	

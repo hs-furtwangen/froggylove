@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FemaleFrog : Frog {
-    protected MaleFrog partner; 
+    public MaleFrog partner; 
 
     virtual protected void Bang()
     {

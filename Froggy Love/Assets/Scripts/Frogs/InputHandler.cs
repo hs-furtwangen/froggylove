@@ -26,7 +26,7 @@ public class InputHandler : MonoBehaviour {
 			RaycastHit hit;
 			if(Physics.Raycast(touchRay.origin, touchRay.direction * 30, out hit)){
 				// Debug.Log(hit.collider.gameObject.name);
-				if(hit.collider.gameObject.GetComponentInParent<MaleFrog>() != null){
+				if(hit.collider.gameObject.GetComponentInParent<MaleFrog>() != null && !(hit.collider.gameObject.GetComponentInParent<MaleFrog>().state == behaviourStates.PIGGYBACKING)){
 					holdingFrog = true;
 					frog = hit.collider.gameObject;
 					frog.GetComponent<MaleFrog>().pickUp();

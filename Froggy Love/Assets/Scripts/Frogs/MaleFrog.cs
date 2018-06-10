@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaleFrog : Frog{
 
-    private behaviourStates state;
+    public behaviourStates state;
 
     public void setBehaviourState(behaviourStates state)
     {
@@ -33,20 +33,21 @@ public class MaleFrog : Frog{
     {
         state = behaviourStates.FLOATING;
         GameObject.FindGameObjectWithTag("Log").GetComponent<Log>().freePosition(moveTarget);
+        anim.SetTrigger("PICKUP");
     }
 
     public void putDown()
     {
         state = behaviourStates.FALLING;
         moveTo(null);
-    }
+        }
 
     void OnTriggerEnter(Collider collision)
     {
         // Debug.Log("hit1");
         if(state == behaviourStates.FALLING)
         {
-            if (collision.gameObject.GetComponent<FemaleFrog>() != null)
+            if (collision.gameObject.GetComponent<FemaleFrog>() != null && collision.gameObject.GetComponent<FemaleFrog>().partner == null)
             {
                 attachTo(collision.gameObject);
             }
@@ -68,6 +69,7 @@ public class MaleFrog : Frog{
 	void Update () {
         if(state == behaviourStates.FALLING){
             // this.transform.position += Vector3.down * Time.deltaTime * 3;
+            anim.SetTrigger("LANDING");
             GetComponent<Rigidbody>().MovePosition(this.transform.position + Vector3.down * Time.deltaTime * 3);
             float min = size / 2;
             if(this.transform.position.y < min){
@@ -80,7 +82,7 @@ public class MaleFrog : Frog{
             } 
         }
         if (moveTarget != null && state == behaviourStates.MOVING)
-        {
+        {   
             move();
         
             if(moveTarget.tag == "Log"){
