@@ -6,7 +6,7 @@ public class GodBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if(Random.Range(0f, 1f) <= 0.5)
+        if(Random.Range(0f, 1f) <= 0.5f)
         {
             this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprite/GodPopuko");
         }

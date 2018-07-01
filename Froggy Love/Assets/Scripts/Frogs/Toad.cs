@@ -12,6 +12,7 @@ public class Toad : FemaleFrog {
             int totalPoints = (int)(this.size * 1000) + partner.getPoints() + (int)(Random.Range(0.0f, 999.0f));
             GameController.gameControllerInstance.addPoints(totalPoints, pointPotential);
         }
+        Destroy(this.gameObject);
     }
     // Use this for initialization
     void Start () {
@@ -25,12 +26,20 @@ public class Toad : FemaleFrog {
         toadMat = Resources.Load<Material>("Material/brown");
         frogRenderer.material = toadMat;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		if (moveTarget != null)
+    public void setPartner(MaleFrog partner)
+    {
+        base.setPartner(partner);
+
+    }
+    // Update is called once per frame
+    void Update () {
+        if (moveTarget != null)
         {
             move();
+            if ((this.transform.position - moveTarget.transform.position).magnitude < 2)
+            {
+                Bang();
+            }
         }
-	}
+    }
 }

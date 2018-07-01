@@ -13,14 +13,23 @@ public class MaleFrog : Frog{
 
     public void attachTo(GameObject target)
     {
-        // Debug.Log("Hit");
-        if (target.GetComponent<FemaleFrog>() != null)
+         
+        if (target.GetComponent<FemaleFrog>() != null || target.GetComponent<Toad>() != null)
         {
             Vector3 attachTarget = target.transform.Find("Marker").transform.position;
             this.transform.position = attachTarget;
             setBehaviourState(behaviourStates.PIGGYBACKING);
-            FemaleFrog partner = target.GetComponent<FemaleFrog>();
-            partner.setPartner(this);
+            if(target.GetComponent<FemaleFrog>() != null)
+            {
+                FemaleFrog partner = target.GetComponent<FemaleFrog>();
+                partner.setPartner(this);
+            }
+            else if (target.GetComponent<Toad>() != null)
+            {
+                Toad partner = target.GetComponent<Toad>();
+                partner.setPartner(this);
+            }
+            Debug.Log("Áttaching to " + target);
             this.transform.rotation = target.transform.rotation;
             this.transform.SetParent(target.transform);
             this.tag = "Tag";
@@ -49,6 +58,10 @@ public class MaleFrog : Frog{
         if(state == behaviourStates.FALLING)
         {
             if (collision.gameObject.GetComponent<FemaleFrog>() != null && collision.gameObject.GetComponent<FemaleFrog>().partner == null)
+            {
+                attachTo(collision.gameObject);
+            }
+            else if (collision.gameObject.GetComponent<Toad>() != null && collision.gameObject.GetComponent<Toad>().partner == null)
             {
                 attachTo(collision.gameObject);
             }
